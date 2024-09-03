@@ -6,6 +6,7 @@
  */
 
 import inventory from './inventory.mjs';
+import { v4 as uuidv4 } from 'uuid';
 console.log('\n=== beginning of printout ================================')
 console.log('inventory:', inventory);
 
@@ -37,10 +38,15 @@ console.log(makeOptions(inventory, 'foundation'));
 
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
+  static instanceCounter = 0;
+
   constructor(salad) {
     if (salad !== undefined) {
       Object.keys(salad).forEach(ingredient => this[ingredient] = salad[ingredient])
     }
+
+    Object.defineProperty(this, 'id', { value: Salad.instanceCounter++, writable: false });
+    Object.defineProperty(this, 'uuid', { value: uuidv4(), writable: false });
   }
 
   add(name, properties) {
@@ -152,10 +158,26 @@ myGourmetSalad.add('Bacon', inventory['Bacon'], 1)
 console.log('Med extra bacon kostar den ' + myGourmetSalad.getPrice() + ' kr');
 
 console.log('\n--- Assignment 6 ---------------------------------------')
-/*
+
 console.log('Min gourmetsallad har id: ' + myGourmetSalad.id);
 console.log('Min gourmetsallad har uuid: ' + myGourmetSalad.uuid);
-*/
+
+console.log("\n--- Assignment 7 ---------------------------------------");
+
+const salad1 = new Salad();
+console.log("Sallad 1 har uuid: " + salad1.uuid);
+// add ingredients to salad 1
+const salad2 = new Salad(salad1);
+console.log("Sallad 2 är kopia av Sallad 1 och har uuid: " + salad2.uuid);
+// salad1.uuid !== salad2.uuid, they are different salads salad2.add(Bacon', inventory['Bacon']);
+//order(salad1, salad2);
+
+// const salad1 = new Salad(); // add ingredients to salad 1
+//         storeInDatabase(salad1);
+//         // app is reloaded, all JavaScript objects are lost
+//         const text = fetchFromDatabase();
+// const salad2 = Salad.parse(text);
+// salad1.uuid === salad2.uuid, they are the same salad salad2.add(Bacon', inventory['Bacon']); storeSaladInDatabase(salad2); // update the existing salad
 
 /**
  * Reflection question 4
