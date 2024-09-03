@@ -1,7 +1,8 @@
 'use strict';
 /**
  * Reflection question 1
- * your answer goes here
+ * Since non-declared variables are automatically declared as undefined, this will equal to false.
+ * Therefore they don't need to be explicitly set as false.
  */
 
 import inventory from './inventory.mjs';
@@ -25,18 +26,32 @@ for (const name in inventory) {
 console.log('\n--- Assignment 1 ---------------------------------------')
 
 function makeOptions(inv, prop) {
-  return 'TODO';
+  const options = Object.entries(inv).filter(([name, item]) => item[prop])
+  .map(([name, item], index) =>
+    `<option value="${name}" key=${name}> ${name}, ${item.price} kr</option>`
+  );
+  return options;
 }
 
 console.log(makeOptions(inventory, 'foundation'));
 
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
-  constructor() { }
-  add(name, properties) { }
-  remove(name) { }
+  constructor() {
+    this.ingredients = {}
+  }
+
+  add(name, properties) { 
+    this.ingredients[name] = properties
+    return this
+  }
+
+  remove(name) {
+    this.ingredients[name] = undefined
+    return this
+  }
 }
-/*
+
 let myCaesarSalad = new Salad()
   .add('Sallad', inventory['Sallad'])
   .add('Kycklingfilé', inventory['Kycklingfilé'])
@@ -48,16 +63,15 @@ let myCaesarSalad = new Salad()
 console.log(JSON.stringify(myCaesarSalad) + '\n');
 myCaesarSalad.remove('Gurka');
 console.log(JSON.stringify(myCaesarSalad) + '\n');
-*/
+
 console.log('\n--- Assignment 3 ---------------------------------------')
-//console.log('En ceasarsallad kostar ' + myCaesarSalad.getPrice() + 'kr');
+// console.log('En ceasarsallad kostar ' + myCaesarSalad.getPrice() + 'kr');
 // En ceasarsallad kostar 45kr
-//console.log('En ceasarsallad har ' + myCaesarSalad.count('lactose') + ' ingredienser med laktos');
+// console.log('En ceasarsallad har ' + myCaesarSalad.count('lactose') + ' ingredienser med laktos');
 // En ceasarsallad har 2 ingredienser med laktos
-//console.log('En ceasarsallad har ' + myCaesarSalad.count('extra') + ' tillbehör');
+// console.log('En ceasarsallad har ' + myCaesarSalad.count('extra') + ' tillbehör');
 // En ceasarsallad har 3 tillbehör
 
-/*
 console.log('\n--- reflection question 3 ---------------------------------------')
 console.log('typeof Salad: ' + typeof Salad);
 console.log('typeof Salad.prototype: ' + typeof Salad.prototype);
@@ -67,7 +81,7 @@ console.log('typeof myCaesarSalad.prototype: ' + typeof myCaesarSalad.prototype)
 console.log('check 1: ' + (Salad.prototype === Object.getPrototypeOf(Salad)));
 console.log('check 2: ' + (Salad.prototype === Object.getPrototypeOf(myCaesarSalad)));
 console.log('check 3: ' + (Object.prototype === Object.getPrototypeOf(Salad.prototype)));
-*/
+
 console.log('\n--- Assignment 4 ---------------------------------------')
 /*
 const singleText = JSON.stringify(myCaesarSalad);
