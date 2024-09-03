@@ -52,6 +52,14 @@ class Salad {
   }
 }
 
+Salad.prototype.getPrice = function() {
+  return TODO
+}
+
+Salad.prototype.count = function() {
+  return TODO
+}
+
 let myCaesarSalad = new Salad()
   .add('Sallad', inventory['Sallad'])
   .add('Kycklingfilé', inventory['Kycklingfilé'])
