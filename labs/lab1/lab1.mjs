@@ -37,28 +37,37 @@ console.log(makeOptions(inventory, 'foundation'));
 
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
-  constructor() {
-    this.ingredients = {};
+  constructor(salad) {
+    if (salad !== undefined) {
+      Object.keys(salad).forEach(ingredient => this[ingredient] = salad[ingredient])
+    }
   }
 
   add(name, properties) {
-    this.ingredients[name] = properties;
+    this[name] = properties;
     return this;
   }
 
   remove(name) {
-    delete this.ingredients[name];
+    delete this[name];
     return this;
+  }
+
+  static parse(salad) {
+    // if (salad === typeof "string") {
+      const parsed = JSON.parse(salad);
+      return Array.isArray(parsed) ? parsed.map(salad => new Salad(salad)) : new Salad(parsed);
+    // }
   }
 }
 
 Salad.prototype.getPrice = function () {
-  return Object.keys(this.ingredients).reduce(
-    (acc, ingredient) => acc + this.ingredients[ingredient].price, 0);
+  return Object.keys(this).reduce(
+    (acc, ingredient) => acc + this[ingredient].price, 0);
 }
 
 Salad.prototype.count = function (prop) {
-  return Object.values(this.ingredients).filter(item => item[prop]).length;
+  return Object.values(this).filter(item => item[prop]).length;
 }
 
 let myCaesarSalad = new Salad()
@@ -92,7 +101,7 @@ console.log('check 2: ' + (Salad.prototype === Object.getPrototypeOf(myCaesarSal
 console.log('check 3: ' + (Object.prototype === Object.getPrototypeOf(Salad.prototype)));
 
 console.log('\n--- Assignment 4 ---------------------------------------')
-/*
+
 const singleText = JSON.stringify(myCaesarSalad);
 const arrayText = JSON.stringify([myCaesarSalad, myCaesarSalad]);
 
@@ -108,9 +117,29 @@ console.log('Salad.parse(arrayText)\n' + JSON.stringify(arrayCopy));
 singleCopy.add('Gurka', inventory['Gurka']);
 console.log('originalet kostar ' + myCaesarSalad.getPrice() + ' kr');
 console.log('kopian med gurka kostar ' + singleCopy.getPrice() + ' kr');
-*/
+
 console.log('\n--- Assignment 5 ---------------------------------------')
-/*
+
+class GourmetSalad extends Salad {
+  add(name, properties, size = 1) {
+    if (this[name]) {
+      this[name].size += size;
+    } else {
+      super.add(name, {...properties, size})
+    }
+
+    return this;
+  }
+}
+
+// Ska dessa vara funktioner i klassen?
+GourmetSalad.prototype.getPrice = function () {
+  return Object.keys(this).reduce(
+    (acc, ingredient) => acc + this[ingredient].price * this[ingredient].size,
+    0
+  );
+};
+
 let myGourmetSalad = new GourmetSalad()
   .add('Sallad', inventory['Sallad'], 0.5)
   .add('Kycklingfilé', inventory['Kycklingfilé'], 2)
@@ -121,7 +150,7 @@ let myGourmetSalad = new GourmetSalad()
 console.log('Min gourmetsallad med lite bacon kostar ' + myGourmetSalad.getPrice() + ' kr');
 myGourmetSalad.add('Bacon', inventory['Bacon'], 1)
 console.log('Med extra bacon kostar den ' + myGourmetSalad.getPrice() + ' kr');
-*/
+
 console.log('\n--- Assignment 6 ---------------------------------------')
 /*
 console.log('Min gourmetsallad har id: ' + myGourmetSalad.id);
