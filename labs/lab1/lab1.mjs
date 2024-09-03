@@ -26,10 +26,10 @@ for (const name in inventory) {
 console.log('\n--- Assignment 1 ---------------------------------------')
 
 function makeOptions(inv, prop) {
-  const options = Object.entries(inv).filter(([name, item]) => item[prop])
-  .map(([name, item], index) =>
-    `<option value="${name}" key=${name}> ${name}, ${item.price} kr</option>`
-  );
+  const options = Object.keys(inv).filter(item => inv[item][prop])
+    .map(item =>
+      `<option value="${item}" key=${item}> ${item}, ${inv[item].price} kr</option>`
+    );
   return options;
 }
 
@@ -38,26 +38,27 @@ console.log(makeOptions(inventory, 'foundation'));
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
   constructor() {
-    this.ingredients = {}
+    this.ingredients = {};
   }
 
-  add(name, properties) { 
-    this.ingredients[name] = properties
-    return this
+  add(name, properties) {
+    this.ingredients[name] = properties;
+    return this;
   }
 
   remove(name) {
-    this.ingredients[name] = undefined
-    return this
+    delete this.ingredients[name];
+    return this;
   }
 }
 
-Salad.prototype.getPrice = function() {
-  return TODO
+Salad.prototype.getPrice = function () {
+  return Object.keys(this.ingredients).reduce(
+    (acc, ingredient) => acc + this.ingredients[ingredient].price, 0);
 }
 
-Salad.prototype.count = function() {
-  return TODO
+Salad.prototype.count = function (prop) {
+  return Object.values(this.ingredients).filter(item => item[prop]).length;
 }
 
 let myCaesarSalad = new Salad()
@@ -73,11 +74,11 @@ myCaesarSalad.remove('Gurka');
 console.log(JSON.stringify(myCaesarSalad) + '\n');
 
 console.log('\n--- Assignment 3 ---------------------------------------')
-// console.log('En ceasarsallad kostar ' + myCaesarSalad.getPrice() + 'kr');
+console.log('En ceasarsallad kostar ' + myCaesarSalad.getPrice() + 'kr');
 // En ceasarsallad kostar 45kr
-// console.log('En ceasarsallad har ' + myCaesarSalad.count('lactose') + ' ingredienser med laktos');
+console.log('En ceasarsallad har ' + myCaesarSalad.count('lactose') + ' ingredienser med laktos');
 // En ceasarsallad har 2 ingredienser med laktos
-// console.log('En ceasarsallad har ' + myCaesarSalad.count('extra') + ' tillbehör');
+console.log('En ceasarsallad har ' + myCaesarSalad.count('extra') + ' tillbehör');
 // En ceasarsallad har 3 tillbehör
 
 console.log('\n--- reflection question 3 ---------------------------------------')
