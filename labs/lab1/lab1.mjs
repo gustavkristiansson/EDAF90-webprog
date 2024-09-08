@@ -20,8 +20,13 @@ console.log('\n--- for ... in ---------------------------------------')
 for (const name in inventory) {
   console.log(name);
 }
+
 /**
  * Reflection question 2
+ * An enumerable property in JavaScript means that a property can be viewed if it
+ * is iterated using the for…in loop or Object.keys() method.
+ * When a property is owned it is also enumerable, but the inherited function forEach
+ * is not enumerable, and won't be printed in a loop that iterates over enumerable properties.
  */
 
 console.log('\n--- Assignment 1 ---------------------------------------')
@@ -61,8 +66,8 @@ class Salad {
 
   static parse(salad) {
     // if (salad === typeof "string") {
-      const parsed = JSON.parse(salad);
-      return Array.isArray(parsed) ? parsed.map(salad => new Salad(salad)) : new Salad(parsed);
+    const parsed = JSON.parse(salad);
+    return Array.isArray(parsed) ? parsed.map(salad => new Salad(salad)) : new Salad(parsed);
     // }
   }
 }
@@ -97,14 +102,25 @@ console.log('En ceasarsallad har ' + myCaesarSalad.count('extra') + ' tillbehör
 // En ceasarsallad har 3 tillbehör
 
 console.log('\n--- reflection question 3 ---------------------------------------')
-console.log('typeof Salad: ' + typeof Salad);
-console.log('typeof Salad.prototype: ' + typeof Salad.prototype);
-console.log('typeof Salad.prototype.prototype: ' + typeof Salad.prototype.prototype);
-console.log('typeof myCaesarSalad: ' + typeof myCaesarSalad);
-console.log('typeof myCaesarSalad.prototype: ' + typeof myCaesarSalad.prototype);
-console.log('check 1: ' + (Salad.prototype === Object.getPrototypeOf(Salad)));
-console.log('check 2: ' + (Salad.prototype === Object.getPrototypeOf(myCaesarSalad)));
-console.log('check 3: ' + (Object.prototype === Object.getPrototypeOf(Salad.prototype)));
+/**
+ * Reflection question 3
+ * Classes in JavaScript have a constructor function and its methods are stored
+ * on the class' prototype object. The instances of the class inherit its properties and
+ * the methods from the prototype. Inherited properties are represented by the prototype chain.
+ * 
+ * Only functions have a prototype property (ex Salad) and instances are linked to their
+ * constructor's prototype. The prototype chain is the inheritance and determines which
+ * properties and methods an object has. The prototype property is the starting value of
+ * the prototype chain. Next object in prototype chain: Object.getPrototypeOf()
+ */
+console.log('typeof Salad: ' + typeof Salad); // constructor function
+console.log('typeof Salad.prototype: ' + typeof Salad.prototype); // object
+console.log('typeof Salad.prototype.prototype: ' + typeof Salad.prototype.prototype); // doesn't exist
+console.log('typeof myCaesarSalad: ' + typeof myCaesarSalad); // instance of Salad -> object
+console.log('typeof myCaesarSalad.prototype: ' + typeof myCaesarSalad.prototype); // instances don't have a prototype property
+console.log('check 1: ' + (Salad.prototype === Object.getPrototypeOf(Salad))); //false: Salad's prototype is linked to Object.prototype
+console.log('check 2: ' + (Salad.prototype === Object.getPrototypeOf(myCaesarSalad))); //true
+console.log('check 3: ' + (Object.prototype === Object.getPrototypeOf(Salad.prototype))); //true
 
 console.log('\n--- Assignment 4 ---------------------------------------')
 
@@ -131,7 +147,7 @@ class GourmetSalad extends Salad {
     if (this[name]) {
       this[name].size += size;
     } else {
-      super.add(name, {...properties, size})
+      super.add(name, { ...properties, size })
     }
 
     return this;
@@ -180,11 +196,14 @@ console.log("Sallad 2 är kopia av Sallad 1 och har uuid: " + salad2.uuid);
 // salad1.uuid === salad2.uuid, they are the same salad salad2.add(Bacon', inventory['Bacon']); storeSaladInDatabase(salad2); // update the existing salad
 
 /**
- * Reflection question 4
+ * Reflection question 4: In which object are static properties stored?
+ * They are stored on the constructor function (not on instances or the prototype).
  */
 /**
- * Reflection question 5
+ * Reflection question 5: Can you make the id property read only?
+ * Yes, we can use Object.defineProperty() and set the writable attribute to false.
  */
 /**
- * Reflection question 6
+ * Reflection question 6: Can properties be private?
+ * Yes, by using # they're only accessible through dot notation within the class.
  */
