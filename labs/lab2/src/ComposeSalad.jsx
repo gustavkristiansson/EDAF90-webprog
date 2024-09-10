@@ -5,15 +5,18 @@ function ComposeSalad(props) {
   const [foundation, setFoundation] = useState("Pasta");
   const [extras, setExtra] = useState({ Bacon: true, Fetaost: true });
 
+  function handleFoundation(event) {
+    setFoundation(event.target.value);
+  }
+
   return (
     <div className="container col-12">
       <div className="row h-200 p-5 bg-light border rounded-3">
         <h2>Välj innehållet i din sallad</h2>
         <fieldset className="col-md-12">
           <label htmlFor="foundation" className="form-label">Välj bas</label>
-          <select value={foundation} className="form-select" id="foundation">
-            <option key="Sallad" value="Sallad">Salad</option>
-            <option key="Pasta" value="Pasta">Pasta</option>
+          <select onChange={handleFoundation} value={foundation} className="form-select" id="foundation">
+            {foundationList.map(item => <option key={item} value={item}>{item}</option>)}
           </select>
         </fieldset>
       </div>
