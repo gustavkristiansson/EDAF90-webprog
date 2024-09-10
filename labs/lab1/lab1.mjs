@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Reflection question 1
+ * Reflection question 1: Why don’t we need to store properties with the value false in the JavaScript objects?
  * Since non-declared variables are automatically declared as undefined, this will equal to false.
  * Therefore they don't need to be explicitly set as false.
  */
@@ -22,7 +22,7 @@ for (const name in inventory) {
 }
 
 /**
- * Reflection question 2
+ * Reflection question 2: When will the two examples above give different outputs, and why is inherited functions, such as forEach(), not printed?
  * An enumerable property in JavaScript means that a property can be viewed if it
  * is iterated using the for…in loop or Object.keys() method.
  * When a property is owned it is also enumerable, but the inherited function forEach
@@ -103,7 +103,9 @@ console.log('En ceasarsallad har ' + myCaesarSalad.count('extra') + ' tillbehör
 
 console.log('\n--- reflection question 3 ---------------------------------------')
 /**
- * Reflection question 3
+ * Reflection question 3: How are classes and inherited properties represented in JavaScript?
+ * What is the difference between an object’s prototype chain and having a prototype property?
+ * 
  * Classes in JavaScript have a constructor function and its methods are stored
  * on the class' prototype object. The instances of the class inherit its properties and
  * the methods from the prototype. Inherited properties are represented by the prototype chain.
@@ -154,7 +156,6 @@ class GourmetSalad extends Salad {
   }
 }
 
-// Ska dessa vara funktioner i klassen?
 GourmetSalad.prototype.getPrice = function () {
   return Object.keys(this).reduce(
     (acc, ingredient) => acc + this[ingredient].price * this[ingredient].size,
