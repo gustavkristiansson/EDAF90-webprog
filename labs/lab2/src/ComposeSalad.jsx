@@ -2,11 +2,23 @@ import { useState } from "react";
 
 function ComposeSalad(props) {
   const foundationList = Object.keys(props.inventory).filter((name) => props.inventory[name].foundation);
+  const proteinList = Object.keys(props.inventory).filter((name) => props.inventory[name].protein);
+  const saladExtras = Object.keys(props.inventory).filter(name => props.inventory[name].extra); 
   const [foundation, setFoundation] = useState("Pasta");
-  const [extras, setExtra] = useState({ Bacon: true, Fetaost: true });
+  const [protein, setProtein] = useState("Kycklingfilé");
+  // const [extras, setExtra] = useState({ Bacon: true, Fetaost: true });
+  const [extras, setExtra] = useState(saladExtras);
 
   function handleFoundation(event) {
     setFoundation(event.target.value);
+  }
+
+  function handleProtein(event) {
+    setProtein(event.target.value);
+  }
+
+  function handleExtras(event) {
+    setExtra(event.target.value);
   }
 
   return (
@@ -18,6 +30,19 @@ function ComposeSalad(props) {
           <select onChange={handleFoundation} value={foundation} className="form-select" id="foundation">
             {foundationList.map(item => <option key={item} value={item}>{item}</option>)}
           </select>
+          <label htmlFor="protein" className="form-label">Välj protein</label>
+          <select onChange={handleProtein} value={protein} className="form-select" id="protein">
+            {proteinList.map(item => <option key={item} value={item}>{item}</option>)}
+          </select>
+          <label htmlFor="extras" className="form-label">Välj tillbehör</label>
+          <div onChange={handleExtras} checked={extras} className="form-check" id="extras">
+            {saladExtras.map(item =>
+              <div key={item}>
+                <input className="form-check-input" type="checkbox" id="flexCheckDefault"/>
+                <label className="form-check-label" htmlFor="flexCheckDefault">{item}</label>
+              </div>
+            )}
+          </div> 
         </fieldset>
       </div>
     </div>
