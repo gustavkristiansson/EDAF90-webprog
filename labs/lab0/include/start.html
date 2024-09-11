@@ -1,12 +1,52 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
+<style>
+  h1 {
+    text-align: center;
+    color: green;
+  }
+
+  body {
+    background-color: greenyellow;
+    color: black;
+    text-align: left;
+    border-radius: 1;
+    padding: 10;
+    margin-right: auto;
+    margin-top: auto;
+  }
+</style>
+
 <head>
   <meta charset="UTF-8">
   <title>EDAF90</title>
 </head>
 
 <body>
-  <h1>My own form</h1>
+  <img src="https://www.w3schools.com/favicon.ico" alt="w3schools logo">
+  <h1 tabindex="0">Order a hamburger</h1>
+  <form>
+    <fieldset>
+      <legend>Choose size:</legend>
+      <select name="size-select" id="size">
+        <option value="90g">90g</option>
+        <option value="120g">120g</option>
+        <option value="180g">180g</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend>Add-ons:</legend>
+      <input type="checkbox" id="onion">
+      <label for="onion">onion</label>
+      <input type="checkbox" id="tomato">
+      <label for="tomato">tomato</label>
+      <input type="checkbox" id="cucumber">
+      <label for="cucumber">cucumber</label>
+    </fieldset>
+
+    <button type="place">Place order</button>
+  </form>
 
 </html>
