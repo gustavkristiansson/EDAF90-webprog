@@ -27,13 +27,19 @@ function ComposeSalad(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    props.addSalad(new Salad({
-      foundation: { name: foundation, ...props.inventory[foundation]},
-      protein: { name: protein, ...props.inventory[protein]},
-      dressing: { name: dressing, ...props.inventory[dressing]},
-      ...Object
-    }))
+    let salad = new Salad();
+    salad
+      .add(foundation, props.inventory[foundation])
+      .add(protein, props.inventory[protein])
+      .add(dressing, props.inventory[dressing]);
+    Object.keys(extras).map(extra => salad.add(extra, props.inventory[extra]));
 
+    props.addSalad(salad);
+
+    setFoundation("Pasta");
+    setProtein("Kycklingfilé");
+    setDressing("Ceasardressing");
+    setExtra({ Bacon: true, Fetaost: true });
   }
 
   return (
@@ -54,13 +60,13 @@ function ComposeSalad(props) {
             <div className="row row-cols-4 mb-3" id="extras">
               {saladExtras.map(item =>
                 <div key={item} className="form-check">
-                  <input 
-                    onChange={event => setExtra({ ...extras, [item]: event.target.checked})} 
-                    className="form-check-input col" 
-                    type="checkbox" 
-                    id="flexCheckDefault" 
-                    value={item} 
-                    checked={extras[item] || false} 
+                  <input
+                    onChange={event => setExtra({ ...extras, [item]: event.target.checked })}
+                    className="form-check-input col"
+                    type="checkbox"
+                    id="flexCheckDefault"
+                    value={item}
+                    checked={extras[item] || false}
                   />
                   <label className="form-check-label" htmlFor="flexCheckDefault">{item}</label>
                 </div>

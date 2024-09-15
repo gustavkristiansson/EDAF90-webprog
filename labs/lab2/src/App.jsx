@@ -12,7 +12,7 @@ function App() {
         <span className="fs-4">Min egen salladsbar</span>
       </header>
 
-      <ComposeSalad inventory={inventory} addSalad={salad => setShoppingCart(shoppingCart.concat([salad]))}/>
+      <ComposeSalad inventory={inventory} addSalad={salad => setShoppingCart(shoppingCart.concat([salad]))} />
 
       {console.log(shoppingCart)}
 
