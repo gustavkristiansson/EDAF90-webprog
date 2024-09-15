@@ -1,13 +1,15 @@
 import { useState } from "react";
 
 function ComposeSalad(props) {
-  const foundationList = Object.keys(props.inventory).filter((name) => props.inventory[name].foundation);
-  const proteinList = Object.keys(props.inventory).filter((name) => props.inventory[name].protein);
-  const saladExtras = Object.keys(props.inventory).filter(name => props.inventory[name].extra); 
+  const foundationList = Object.keys(props.inventory).filter(name => props.inventory[name].foundation);
+  const proteinList = Object.keys(props.inventory).filter(name => props.inventory[name].protein);
+  const saladExtras = Object.keys(props.inventory).filter(name => props.inventory[name].extra);
+  const dressingList = Object.keys(props.inventory).filter(name => props.inventory[name].dressing);
   const [foundation, setFoundation] = useState("Pasta");
   const [protein, setProtein] = useState("Kycklingfilé");
   // const [extras, setExtra] = useState({ Bacon: true, Fetaost: true });
   const [extras, setExtra] = useState(saladExtras);
+  const [dressing, setDressing] = useState(dressingList)
 
   function handleFoundation(event) {
     setFoundation(event.target.value);
@@ -19,6 +21,10 @@ function ComposeSalad(props) {
 
   function handleExtras(event) {
     setExtra(event.target.value);
+  }
+
+  function handleDressing(event) {
+    setDressing(event.target.value);
   }
 
   return (
@@ -38,11 +44,15 @@ function ComposeSalad(props) {
           <div onChange={handleExtras} checked={extras} className="form-check" id="extras">
             {saladExtras.map(item =>
               <div key={item}>
-                <input className="form-check-input" type="checkbox" id="flexCheckDefault"/>
+                <input className="form-check-input" type="checkbox" id="flexCheckDefault" />
                 <label className="form-check-label" htmlFor="flexCheckDefault">{item}</label>
               </div>
             )}
-          </div> 
+          </div>
+          <label htmlFor="dressing" className="form-label">Välj dressing</label>
+          <select onChange={handleDressing} value={dressing} className="form-select" id="dressing">
+            {dressingList.map(item => <option key={item} value={item}>{item}</option>)}
+          </select>
         </fieldset>
       </div>
     </div>
