@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import inventory from './inventory.mjs';
 import ComposeSalad from './ComposeSalad';
+import ViewOrder from "./ViewOrder";
 import { useState } from 'react';
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
       <ComposeSalad inventory={inventory} addSalad={salad => setShoppingCart(shoppingCart.concat([salad]))} />
 
       {console.log(shoppingCart)}
+      
+      <ViewOrder shoppingCart={shoppingCart} />
 
       <footer className="pt-3 mt-4 text-muted border-top">
         EDAF90 - webprogrammering
