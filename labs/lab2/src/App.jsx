@@ -13,11 +13,13 @@ function App() {
         <span className="fs-4">Min egen salladsbar</span>
       </header>
 
-      <ComposeSalad inventory={inventory} addSalad={salad => setShoppingCart(shoppingCart.concat([salad]))} />
+      <div className="container col-12">
+        <ComposeSalad inventory={inventory} addSalad={salad => setShoppingCart(shoppingCart.concat([salad]))} />
+      </div>
 
-      {console.log(shoppingCart)}
-      
-      <ViewOrder shoppingCart={shoppingCart} />
+      <div className="container col-12">
+        <ViewOrder shoppingCart={shoppingCart} />
+      </div>
 
       <footer className="pt-3 mt-4 text-muted border-top">
         EDAF90 - webprogrammering
