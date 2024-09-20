@@ -9,8 +9,8 @@ function ComposeSalad(props) {
 
   const [foundation, setFoundation] = useState('Pasta');
   const [protein, setProtein] = useState('Kycklingfilé');
-  const [extras, setExtra] = useState({ Bacon: true, Fetaost: true });
-  const [dressing, setDressing] = useState('Ceasardressing')
+  const [extras, setExtra] = useState({});
+  const [dressing, setDressing] = useState('Ceasardressing');
 
   function handleFoundation(event) {
     setFoundation(event.target.value);
@@ -39,16 +39,25 @@ function ComposeSalad(props) {
     setFoundation("Pasta");
     setProtein("Kycklingfilé");
     setDressing("Ceasardressing");
-    setExtra({ Bacon: true, Fetaost: true });
+    setExtra({});
   }
+  /* 
+    function composeCaesar() {
+      setFoundation("Sallad");
+      setProtein("Kycklingfilé");
+      setDressing("Ceasardressing");
+      setExtra({ "Bacon": true, "Krutonger": true, "Parmesan": true })
+    } */
 
   return (
     <div className="container col-12">
       <div className="row h-200 p-5 bg-light border rounded-3">
         <h2>Välj innehållet i din sallad</h2>
         <form onSubmit={handleSubmit}>
+          <button type="button" onChange={composeCaesar} className="btn btn-secondary mt-2">Caesarsallad</button>
+
           <fieldset className="col-md-12">
-            <label htmlFor="foundation" className="form-label">Välj bas</label>
+            <label htmlFor="foundation" className="form-label mt-4">Välj bas</label>
             <select onChange={handleFoundation} value={foundation} className="form-select mb-3" id="foundation">
               {foundationList.map(item => <option key={item} value={item}>{item}</option>)}
             </select>

@@ -14,11 +14,11 @@ function App() {
       </header>
 
       <div className="container col-12">
-        <ComposeSalad inventory={inventory} addSalad={salad => setShoppingCart(shoppingCart.concat([salad]))} />
+        <ViewOrder shoppingCart={shoppingCart} />
       </div>
 
       <div className="container col-12">
-        <ViewOrder shoppingCart={shoppingCart} />
+        <ComposeSalad inventory={inventory} addSalad={salad => setShoppingCart(shoppingCart.concat([salad]))} />
       </div>
 
       <footer className="pt-3 mt-4 text-muted border-top">
