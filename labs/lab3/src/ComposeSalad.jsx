@@ -60,7 +60,7 @@ function ComposeSalad() {
     );
 
     addSalad(salad);
-    navigate(`../view-order/confirm/${salad.uuid}`);
+    navigate(`/view-order/confirm/${salad.uuid}`);
 
     setFoundation("");
     setProtein("");
