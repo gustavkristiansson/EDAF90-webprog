@@ -52,26 +52,11 @@ function ComposeSalad(props) {
     setExtra({});
   }
 
-  function composeCaesar() {
-    setFoundation("Sallad");
-    setProtein("Kycklingfilé");
-    setDressing("Ceasardressing");
-    setExtra({ Bacon: true, Krutonger: true, Parmesan: true });
-  }
-
   return (
     <div className="container col-12">
       <div className="row h-200 p-5 bg-light border rounded-3">
         <h2>Välj innehållet i din sallad</h2>
         <form onSubmit={handleSubmit}>
-          <button
-            type="button"
-            onChange={composeCaesar}
-            className="btn btn-secondary mt-2"
-          >
-            Caesarsallad
-          </button>
-
           <fieldset className="col-md-12">
             <label htmlFor="foundation" className="form-label mt-4">
               Välj bas
