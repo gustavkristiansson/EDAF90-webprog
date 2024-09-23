@@ -46,16 +46,12 @@ function ComposeSalad() {
       return;
     }
 
-    // if (Object.keys(extras).length < 3 || Object.keys(extras).length > 9) {
-    //   return;
-    // }
-
     let salad = new Salad();
     salad
       .add(foundation, inventory[foundation])
       .add(protein, inventory[protein])
       .add(dressing, inventory[dressing]);
-    Object.keys(extras).map((extra) =>
+    Object.keys(extras).filter(extra => extras[extra]).map((extra) =>
       salad.add(extra, inventory[extra])
     );
 
@@ -100,7 +96,6 @@ function ComposeSalad() {
                 </option>
               ))}
             </select>
-            {/* <div className="invalid-feedback">Du måste fylla i</div> */}
             <label htmlFor="protein" className="form-label">
               Välj protein
             </label>
@@ -129,7 +124,7 @@ function ComposeSalad() {
                       setExtra({ ...extras, [item]: event.target.checked });
                       if (Object.keys(extras).length > 2 && Object.keys(extras).length < 10) {
                         setExtrasError(false);
-                      } 
+                      }
                     }}
                     className="form-check-input col"
                     type="checkbox"
@@ -146,10 +141,10 @@ function ComposeSalad() {
                 </div>
               ))}
             </div>
-            {showExtrasError && 
-            (<div className="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
-               <p>Du måste välja minst 3 och max 9 tillbehör.</p>
-            </div>)}
+            {showExtrasError &&
+              (<div className="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+                <p>Du måste välja minst 3 och max 9 tillbehör.</p>
+              </div>)}
             <label htmlFor="dressing" className="form-label">
               Välj dressing
             </label>
