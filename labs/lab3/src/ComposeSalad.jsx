@@ -59,6 +59,11 @@ function ComposeSalad() {
       salad.add(extra, inventory[extra])
     );
 
+    if (Object.keys(extras).length > 9 || Object.keys(extras).length < 3) {
+      setExtrasError(true);
+      return;
+    };
+
     addSalad(salad);
     navigate(`/view-order/confirm/${salad.uuid}`);
 
@@ -120,11 +125,12 @@ function ComposeSalad() {
               {saladExtras.map((item) => (
                 <div key={item} className="form-check">
                   <input
-                    onChange={(event) =>
-                      // Object.keys(extras).length < 3 && Object.keys(extras).length > 9 ? 
-                      // setExtrasError(true) :  
-                      setExtra({ ...extras, [item]: event.target.checked })
-                    }
+                    onChange={(event) => {
+                      setExtra({ ...extras, [item]: event.target.checked });
+                      if (Object.keys(extras).length > 2 && Object.keys(extras).length < 10) {
+                        setExtrasError(false);
+                      } 
+                    }}
                     className="form-check-input col"
                     type="checkbox"
                     id="flexCheckDefault"
@@ -140,6 +146,10 @@ function ComposeSalad() {
                 </div>
               ))}
             </div>
+            {showExtrasError && 
+            (<div className="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+               <p>Du måste välja minst 3 och max 9 tillbehör.</p>
+            </div>)}
             <label htmlFor="dressing" className="form-label">
               Välj dressing
             </label>
