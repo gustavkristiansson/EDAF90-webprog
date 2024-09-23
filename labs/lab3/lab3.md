@@ -1,7 +1,7 @@
 # Reflektionsfrågor
-**What is the difference between using "<Link>" and "<NavLink>" in your navigation bar?** Try it: click on a tab and then outside it to move the focus away from the tab. You can also reload the page.
-"<Link>" länkar till olika sidor
-"<NavLink>" hänger ihop med vilken URL som är aktiv, mer styling options
+**What is the difference between using \<Link\> and \<NavLink\> in your navigation bar?** Try it: click on a tab and then outside it to move the focus away from the tab. You can also reload the page.
+\<Link\> länkar till olika sidor
+\<NavLink\> hänger ihop med vilken URL som är aktiv, mer styling options
 
 **What happens if the user writes an invalid uuid in the url?**
 
