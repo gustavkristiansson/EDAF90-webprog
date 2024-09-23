@@ -1,18 +1,21 @@
 import { useState } from "react";
 import Salad from "./Salad";
+import { useOutletContext } from "react-router-dom";
 
-function ComposeSalad(props) {
-  const foundationList = Object.keys(props.inventory).filter(
-    (name) => props.inventory[name].foundation
+function ComposeSalad() {
+  const { inventory, addSalad } = useOutletContext();
+
+  const foundationList = Object.keys(inventory).filter(
+    (name) => inventory[name].foundation
   );
-  const proteinList = Object.keys(props.inventory).filter(
-    (name) => props.inventory[name].protein
+  const proteinList = Object.keys(inventory).filter(
+    (name) => inventory[name].protein
   );
-  const saladExtras = Object.keys(props.inventory).filter(
-    (name) => props.inventory[name].extra
+  const saladExtras = Object.keys(inventory).filter(
+    (name) => inventory[name].extra
   );
-  const dressingList = Object.keys(props.inventory).filter(
-    (name) => props.inventory[name].dressing
+  const dressingList = Object.keys(inventory).filter(
+    (name) => inventory[name].dressing
   );
 
   const [foundation, setFoundation] = useState("");
@@ -20,6 +23,7 @@ function ComposeSalad(props) {
   const [extras, setExtra] = useState({});
   const [dressing, setDressing] = useState("");
   const [touched, setTouched] = useState(false);
+  const [showExtrasError, setExtrasError] = useState(false);
 
   function handleFoundation(event) {
     setFoundation(event.target.value);
@@ -41,16 +45,20 @@ function ComposeSalad(props) {
       return;
     }
 
+    // if (Object.keys(extras).length < 3 || Object.keys(extras).length > 9) {
+    //   return;
+    // }
+
     let salad = new Salad();
     salad
-      .add(foundation, props.inventory[foundation])
-      .add(protein, props.inventory[protein])
-      .add(dressing, props.inventory[dressing]);
+      .add(foundation, inventory[foundation])
+      .add(protein, inventory[protein])
+      .add(dressing, inventory[dressing]);
     Object.keys(extras).map((extra) =>
-      salad.add(extra, props.inventory[extra])
+      salad.add(extra, inventory[extra])
     );
 
-    props.addSalad(salad);
+    addSalad(salad);
 
     setFoundation("");
     setProtein("");
@@ -111,6 +119,8 @@ function ComposeSalad(props) {
                 <div key={item} className="form-check">
                   <input
                     onChange={(event) =>
+                      // Object.keys(extras).length < 3 && Object.keys(extras).length > 9 ? 
+                      // setExtrasError(true) :  
                       setExtra({ ...extras, [item]: event.target.checked })
                     }
                     className="form-check-input col"

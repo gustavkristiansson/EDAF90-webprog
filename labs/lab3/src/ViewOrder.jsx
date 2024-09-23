@@ -1,9 +1,13 @@
-function ViewOrder(props) {
+import { useOutletContext } from "react-router-dom";
+
+function ViewOrder() {
+  const { shoppingCart } = useOutletContext();
+
   return (
     <div className="container bg-light col-12">
       <div className="row h-200 p-5 border rounded-3">
         <h2>Varukorgen</h2>
-        {props.shoppingCart.map(
+        {shoppingCart.map(
           cartItem => 
             <div key={cartItem.uuid}>
               {(Object.keys(cartItem).map(ingredient =>
