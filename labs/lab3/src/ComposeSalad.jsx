@@ -15,11 +15,10 @@ function ComposeSalad(props) {
     (name) => props.inventory[name].dressing
   );
 
-  const [foundation, setFoundation] = useState("");
+  const [foundation, setFoundation] = useState("Pasta");
   const [protein, setProtein] = useState("Kycklingfilé");
   const [extras, setExtra] = useState({});
   const [dressing, setDressing] = useState("Ceasardressing");
-  const [touched, setTouched] = useState(false);
 
   function handleFoundation(event) {
     setFoundation(event.target.value);
@@ -35,7 +34,6 @@ function ComposeSalad(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setTouched(true);
 
     let salad = new Salad();
     salad
@@ -65,7 +63,7 @@ function ComposeSalad(props) {
     <div className="container col-12">
       <div className="row h-200 p-5 bg-light border rounded-3">
         <h2>Välj innehållet i din sallad</h2>
-        <form onSubmit={handleSubmit} noValidate className={touched ? "was-validated" : ""}>
+        <form onSubmit={handleSubmit}>
           <button
             type="button"
             onChange={composeCaesar}
@@ -79,13 +77,11 @@ function ComposeSalad(props) {
               Välj bas
             </label>
             <select
-              required
               onChange={handleFoundation}
               value={foundation}
               className="form-select mb-3"
               id="foundation"
             >
-              <div className="invalid-feedback">Message</div>
               {foundationList.map((item) => (
                 <option key={item} value={item}>
                   {item}

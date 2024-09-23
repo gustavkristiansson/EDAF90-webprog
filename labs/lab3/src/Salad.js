@@ -23,10 +23,8 @@ export default class Salad {
   }
 
   static parse(salad) {
-    // if (salad === typeof "string") {
     const parsed = JSON.parse(salad);
     return Array.isArray(parsed) ? parsed.map(salad => new Salad(salad)) : new Salad(parsed);
-    // }
   }
 
   getPrice() {
