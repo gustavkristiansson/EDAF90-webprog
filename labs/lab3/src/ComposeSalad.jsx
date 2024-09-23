@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Salad from "./Salad";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function ComposeSalad() {
   const { inventory, addSalad } = useOutletContext();
@@ -18,6 +18,7 @@ function ComposeSalad() {
     (name) => inventory[name].dressing
   );
 
+  const navigate = useNavigate();
   const [foundation, setFoundation] = useState("");
   const [protein, setProtein] = useState("");
   const [extras, setExtra] = useState({});
@@ -59,6 +60,7 @@ function ComposeSalad() {
     );
 
     addSalad(salad);
+    navigate(`../view-order/confirm/${salad.uuid}`);
 
     setFoundation("");
     setProtein("");
