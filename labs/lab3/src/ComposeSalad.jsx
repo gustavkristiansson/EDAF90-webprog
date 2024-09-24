@@ -2,6 +2,19 @@ import { useState } from "react";
 import Salad from "./Salad";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
+function SaladSelect({ value, onChange, options, id }) {
+  return (
+    <select value={value} onChange={event => onChange(event.target.value)} className="form-select" required id={id}>
+      <option value="">Gör ditt val</option>
+      {options.map(name => (
+        <option key={name} value={name}>
+          {name}
+        </option>
+      ))}
+    </select>
+  )
+}
+
 function ComposeSalad() {
   const { inventory, addSalad } = useOutletContext();
 
@@ -25,18 +38,6 @@ function ComposeSalad() {
   const [dressing, setDressing] = useState("");
   const [touched, setTouched] = useState(false);
   const [showExtrasError, setExtrasError] = useState(false);
-
-  function handleFoundation(event) {
-    setFoundation(event.target.value);
-  }
-
-  function handleProtein(event) {
-    setProtein(event.target.value);
-  }
-
-  function handleDressing(event) {
-    setDressing(event.target.value);
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -82,37 +83,11 @@ function ComposeSalad() {
             <label htmlFor="foundation" className="form-label mt-4">
               Välj bas
             </label>
-            <select
-              required
-              onChange={handleFoundation}
-              value={foundation}
-              className="form-select mb-3"
-              id="foundation"
-            >
-              <option value="">Gör ditt val</option>
-              {foundationList.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
+            <SaladSelect value={foundation} onChange={setFoundation} options={foundationList} id="foundation" />
             <label htmlFor="protein" className="form-label">
               Välj protein
             </label>
-            <select
-              required
-              onChange={handleProtein}
-              value={protein}
-              className="form-select mb-3"
-              id="protein"
-            >
-              <option value="">Gör ditt val</option>
-              {proteinList.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
+            <SaladSelect value={protein} onChange={setProtein} options={proteinList} id="protein" />
             <label htmlFor="extras" className="form-label">
               Välj tillbehör
             </label>
@@ -148,20 +123,7 @@ function ComposeSalad() {
             <label htmlFor="dressing" className="form-label">
               Välj dressing
             </label>
-            <select
-              required
-              onChange={handleDressing}
-              value={dressing}
-              className="form-select"
-              id="dressing"
-            >
-              <option value="">Gör ditt val</option>
-              {dressingList.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
+            <SaladSelect value={dressing} onChange={setDressing} options={dressingList} id="dressing" />
 
             <button type="submit" className="btn btn-primary mt-4">
               Beställ
