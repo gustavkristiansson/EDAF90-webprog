@@ -82,14 +82,14 @@ function ComposeSalad(props) {
               Välj bas
             </label>
             <SaladSelect value={foundation} onChange={setFoundation} options={foundationList} />
-            <label htmlFor="protein" className="form-label">
+            <label htmlFor="protein" className="form-label mt-4">
               Välj protein
             </label>
             <SaladSelect value={protein} onChange={setProtein} options={proteinList} />
-            <label htmlFor="extras" className="form-label">
+            <label htmlFor="extras" className="form-label mt-4">
               Välj tillbehör
             </label>
-            <div className="row row-cols-4 mb-3" id="extras">
+            <div className="row row-cols-4 mx-auto" id="extras">
               {saladExtras.map((item) => (
                 <div key={item} className="form-check">
                   <input
@@ -111,7 +111,7 @@ function ComposeSalad(props) {
                 </div>
               ))}
             </div>
-            <label htmlFor="dressing" className="form-label">
+            <label htmlFor="dressing" className="form-label mt-4">
               Välj dressing
             </label>
             <SaladSelect value={dressing} onChange={setDressing} options={dressingList} />
