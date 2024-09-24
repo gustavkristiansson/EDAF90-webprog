@@ -25,18 +25,6 @@ function ComposeSalad(props) {
   const [extras, setExtra] = useState({});
   const [dressing, setDressing] = useState("Ceasardressing");
 
-  function handleFoundation(event) {
-    setFoundation(event.target.value);
-  }
-
-  function handleProtein(event) {
-    setProtein(event.target.value);
-  }
-
-  function handleDressing(event) {
-    setDressing(event.target.value);
-  }
-
   function handleSubmit(event) {
     event.preventDefault();
 
