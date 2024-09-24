@@ -57,13 +57,6 @@ function ComposeSalad(props) {
     setExtra({});
   }
 
-  function composeCaesar() {
-    setFoundation("Sallad");
-    setProtein("Kycklingfilé");
-    setDressing("Ceasardressing");
-    setExtra({ Bacon: true, Krutonger: true, Parmesan: true });
-  }
-
   return (
     <div className="container col-12">
       <div className="row h-200 p-5 bg-light border rounded-3">
@@ -71,7 +64,12 @@ function ComposeSalad(props) {
         <form onSubmit={handleSubmit}>
           <button
             type="button"
-            onChange={composeCaesar}
+            onClick={() => {
+              setFoundation("Sallad");
+              setProtein("Kycklingfilé");
+              setDressing("Ceasardressing");
+              setExtra({ Bacon: true, Krutonger: true, Parmesan: true });
+            }}
             className="btn btn-secondary mt-2"
           >
             Caesarsallad
