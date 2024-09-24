@@ -46,7 +46,7 @@ function ComposeSalad() {
       return;
     }
 
-    let salad = new Salad();
+    const salad = new Salad();
     salad
       .add(foundation, inventory[foundation])
       .add(protein, inventory[protein])
@@ -55,7 +55,7 @@ function ComposeSalad() {
       salad.add(extra, inventory[extra])
     );
 
-    if (Object.keys(extras).length > 9 || Object.keys(extras).length < 3) {
+    if (salad.count('extra') > 9 || salad.count('extra') < 3) {
       setExtrasError(true);
       return;
     };
