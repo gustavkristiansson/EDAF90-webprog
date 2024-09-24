@@ -84,14 +84,14 @@ function ComposeSalad() {
               Välj bas
             </label>
             <SaladSelect value={foundation} onChange={setFoundation} options={foundationList} id="foundation" />
-            <label htmlFor="protein" className="form-label">
+            <label htmlFor="protein" className="form-label mt-4">
               Välj protein
             </label>
             <SaladSelect value={protein} onChange={setProtein} options={proteinList} id="protein" />
-            <label htmlFor="extras" className="form-label">
+            <label htmlFor="extras" className="form-label mt-4">
               Välj tillbehör
             </label>
-            <div className="row row-cols-4 mb-3" id="extras">
+            <div className="row row-cols-4 mx-auto" id="extras">
               {saladExtras.map((item) => (
                 <div key={item} className="form-check">
                   <input
@@ -120,7 +120,7 @@ function ComposeSalad() {
               (<div className="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
                 <p>Du måste välja minst 3 och max 9 tillbehör.</p>
               </div>)}
-            <label htmlFor="dressing" className="form-label">
+            <label htmlFor="dressing" className="form-label mt-4">
               Välj dressing
             </label>
             <SaladSelect value={dressing} onChange={setDressing} options={dressingList} id="dressing" />
