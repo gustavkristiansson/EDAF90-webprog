@@ -128,6 +128,19 @@ function ComposeSalad() {
             <button type="submit" className="btn btn-primary mt-4">
               Beställ
             </button>
+                      
+            <button
+              type="reset"
+              onClick={() => {
+                setFoundation("");
+                setProtein("");
+                setDressing("");
+                setExtra({});
+              }}
+              className="btn btn-secondary mt-4 ml-3"
+              >
+              Börja om
+            </button>
           </fieldset>
         </form>
       </div>
