@@ -5,13 +5,15 @@ export default async function inventoryLoader() {
 
     const categoryList = categories.map(async category => {
         const options = await fetchIngredient(category);
-        inventory[category] = options;
+        //for (const option of options) {
+        inventory[category] = [];
+        //}
         return { category, options }
     });
 
     const promiseList = await Promise.all(categoryList);
 
-    console.log(inventory, "inventory");
+    //console.log(inventory, "inventory1");
 
     //console.log(promiseList, "PromiseList");
 
@@ -26,17 +28,21 @@ export default async function inventoryLoader() {
     // }
 
     await Promise.all(promiseList.map(async ({ category, options }) => {
-        const ingredientsList = options.map(name => fetchIngredient(category, name));
-        const ingredients = await Promise.all(ingredientsList);
+        const ingredientsList = await Promise.all(options.map(name => fetchIngredient(category, name)));
 
-        console.log(ingredients, "IngredientList")
+        //console.log(ingredients, "IngredientList")
 
-        inventory.forEach((category, option) => inventory[category][option] = ingredients);
+        ingredientsList.forEach(ingredient => {
+            for (const option of options) {
+                inventory[category][option] = ingredient;
+            }
+        });
         //ingredientsList.forEach(ingredient => { inventory[category] = { ...ingredient } })
     }));
 
     // await new Promise(resolve => setTimeout(resolve, 500));
-    console.log(inventory);
+    //console.log(inventory);
+    console.log(inventory.dressings);
     return inventory;
 }
 

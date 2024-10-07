@@ -6,12 +6,6 @@ import { ConfirmOrder } from "./ConfirmOrder";
 import { ErrorPage } from "./404";
 import inventoryLoader from './InventoryLoader';
 
-// async function inventoryLoader() {
-//   const inventory = { Sallad: { price: 10, foundation: true, vegan: true } };
-//   await new Promise(resolve => setTimeout(resolve, 500));
-//   return inventory;
-// }
-
 const router = createBrowserRouter([
   {
     Component: App,
