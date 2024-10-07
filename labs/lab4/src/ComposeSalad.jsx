@@ -20,23 +20,13 @@ function ComposeSalad() {
   const inventory = useLoaderData();
   const addSalad = useOutletContext();
 
-  console.log(Object.keys(inventory.foundations), "foundations");
-
   const foundationList = Object.keys(inventory.foundations);
 
-  // const foundationList = Object.keys(inventory).filter(
-  //   (name) => inventory[name].foundation
-  // );
+  const proteinList = Object.keys(inventory.proteins);
 
-  const proteinList = Object.keys(inventory).filter(
-    (name) => inventory[name].protein
-  );
-  const saladExtras = Object.keys(inventory).filter(
-    (name) => inventory[name].extra
-  );
-  const dressingList = Object.keys(inventory).filter(
-    (name) => inventory[name].dressing
-  );
+  const saladExtras = Object.keys(inventory.extras);
+
+  const dressingList = Object.keys(inventory.dressings);
 
   const navigate = useNavigate();
   const [foundation, setFoundation] = useState("");
