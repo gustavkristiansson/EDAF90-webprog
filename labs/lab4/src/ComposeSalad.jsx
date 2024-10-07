@@ -50,8 +50,6 @@ function ComposeSalad() {
       salad.add(extra, inventory.extras[extra])
     );
 
-    console.log(salad)
-
     if (salad.count('extra') > 9 || salad.count('extra') < 3) {
       setExtrasError(true);
       return;
