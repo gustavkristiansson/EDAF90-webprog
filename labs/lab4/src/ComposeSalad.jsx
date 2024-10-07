@@ -18,14 +18,11 @@ function SaladSelect({ value, onChange, options, id }) {
 
 function ComposeSalad() {
   const inventory = useLoaderData();
-  const addSalad = useOutletContext();
+  const { addSalad } = useOutletContext();
 
   const foundationList = Object.keys(inventory.foundations);
-
   const proteinList = Object.keys(inventory.proteins);
-
   const saladExtras = Object.keys(inventory.extras);
-
   const dressingList = Object.keys(inventory.dressings);
 
   const navigate = useNavigate();
@@ -46,12 +43,14 @@ function ComposeSalad() {
 
     const salad = new Salad();
     salad
-      .add(foundation, inventory[foundation])
-      .add(protein, inventory[protein])
-      .add(dressing, inventory[dressing]);
+      .add(foundation, inventory.foundations[foundation])
+      .add(protein, inventory.proteins[protein])
+      .add(dressing, inventory.dressings[dressing]);
     Object.keys(extras).filter(extra => extras[extra]).map((extra) =>
-      salad.add(extra, inventory[extra])
+      salad.add(extra, inventory.extras[extra])
     );
+
+    console.log(salad)
 
     if (salad.count('extra') > 9 || salad.count('extra') < 3) {
       setExtrasError(true);

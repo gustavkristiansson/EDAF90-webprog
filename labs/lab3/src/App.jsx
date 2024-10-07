@@ -15,7 +15,7 @@ function App() {
     <div className="container py-4">
       <Header />
       <Navbar />
-      <Outlet context={{ inventory, addSalad, shoppingCart }} />
+      <Outlet context={{ addSalad, shoppingCart }} />
       <Footer />
     </div>
   );
