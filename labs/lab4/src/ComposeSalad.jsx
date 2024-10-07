@@ -17,8 +17,10 @@ function SaladSelect({ value, onChange, options, id }) {
 }
 
 function ComposeSalad() {
-  // const inventory = useLoaderData();
-  const { inventory, addSalad } = useOutletContext();
+  const inventory = useLoaderData();
+
+  console.log(inventory)
+  const addSalad = useOutletContext();
 
   const foundationList = Object.keys(inventory).filter(
     (name) => inventory[name].foundation
