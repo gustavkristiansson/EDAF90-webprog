@@ -16,7 +16,7 @@ function App() {
       <Header />
       <Navbar />
       {nav.state === "loading" && <Spinner />}
-      <Outlet context={{ addSalad, shoppingCart }}/>
+      <Outlet context={{ addSalad, shoppingCart, setShoppingCart }}/>
       <Footer />
     </div>
   );

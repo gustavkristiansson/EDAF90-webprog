@@ -1,11 +1,15 @@
 import { Outlet, useOutletContext, useNavigate } from "react-router-dom";
 import * as bootstrap from "bootstrap"
 import { useState } from "react";
+import Salad from "./Salad";
 
 function ViewOrder() {
-  const { shoppingCart } = useOutletContext();
+  const { shoppingCart, setShoppingCart } = useOutletContext();
   const [orderConfirmed, setOrderConfirmed] = useState()
   const navigate = useNavigate();
+
+
+  console.log(shoppingCart.map((cartItem) => Object.keys(cartItem)));
 
   async function handleClick(e) {
     e.preventDefault()
@@ -33,6 +37,8 @@ function ViewOrder() {
       var toast = new bootstrap.Toast(toastElem);
       toast.show();
 
+      setShoppingCart([])
+      window.localStorage.setItem("shoppingCart", [])
       navigate("/view-order")
     } catch(error) {
       console.log("Woops something went wrong", error);
@@ -53,15 +59,15 @@ function ViewOrder() {
               <span>{`pris: ${cartItem.getPrice()}kr`}</span>
             </div>
           ))}
+          <button
+            type="submit"
+            className="btn btn-primary mt-4 w-25 mx-auto"
+            onClick={handleClick}
+            id="toastBtn"
+          >
+            Beställ
+          </button>
         </div>
-        <button
-          type="submit"
-          className="btn btn-primary mt-4"
-          onClick={handleClick}
-          id="toastBtn"
-        >
-          Beställ
-        </button>
         <div className="toast-container position-fixed bottom-0 end-0 p-3">
           <div
             id="toast"

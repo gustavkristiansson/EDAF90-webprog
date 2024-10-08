@@ -15,7 +15,7 @@ export default async function inventoryLoader() {
         const ingredientsList = await Promise.all(options.map(name => fetchIngredient(category, name)));
 
         ingredientsList.forEach(ingredient => {
-            for (const option of options) {
+            for (var option of options) {
                 inventory[category][option] = ingredient;
             }
         });
