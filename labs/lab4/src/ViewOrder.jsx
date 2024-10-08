@@ -1,10 +1,11 @@
-import { Outlet, useOutletContext, navigate } from "react-router-dom";
+import { Outlet, useOutletContext, useNavigate } from "react-router-dom";
 import * as bootstrap from "bootstrap"
 import { useState } from "react";
 
 function ViewOrder() {
   const { shoppingCart } = useOutletContext();
   const [orderConfirmed, setOrderConfirmed] = useState()
+  const navigate = useNavigate();
 
   async function handleClick(e) {
     e.preventDefault()
@@ -17,7 +18,7 @@ function ViewOrder() {
           "Content-Type": "application/json"
         }
       }).then(response => {
-        if(!response.ok) {
+        if (!response.ok) {
           throw new Error(`${url} returned status ${response.status}`);
         } else {
           return response.json();
@@ -33,7 +34,7 @@ function ViewOrder() {
       toast.show();
 
       navigate("/view-order")
-    } catch(error) {
+    } catch (error) {
       console.log("Woops something went wrong", error);
     }
   }
