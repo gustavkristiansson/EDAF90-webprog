@@ -9,7 +9,6 @@ import inventoryLoader from './InventoryLoader';
 const router = createBrowserRouter([
   {
     Component: App,
-    loader: inventoryLoader,
     children: [
       {
         path: "compose-salad",
