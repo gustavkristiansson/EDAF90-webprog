@@ -1,55 +1,16 @@
-import { Outlet, useOutletContext } from "react-router-dom";
-// import { Toaster } from "./Toaster";
-// import "bootstrap/dist/css/bootstrap.css";
-
-const { Toast } = bootstrap
-
-function Toaster() {
-  return (
-    <div className="toast-container position-fixed bottom-0 end-0 p-3">
-      <div
-        id="toast"
-        className="toast"
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        <div className="toast-header">
-          <img src="..." className="rounded me-2" alt="..." />
-          <strong className="me-auto">Bootstrap</strong>
-          <small>11 mins ago</small>
-          <button
-            type="button"
-            className="btn-close"
-            data-bs-dismiss="toast"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div className="toast-body">Hello, world! This is a toast message.</div>
-      </div>
-    </div>
-  );
-}
+import { Outlet, useOutletContext, navigate } from "react-router-dom";
+import * as bootstrap from "bootstrap"
+import { useState } from "react";
 
 function ViewOrder() {
   const { shoppingCart } = useOutletContext();
+  const [orderConfirmed, setOrderConfirmed] = useState()
 
   async function handleClick(e) {
     e.preventDefault()
 
-    const toastTrigger = document.getElementById("toastBtn");
-    const toastLiveExample = document.getElementById("toast");
-
-    if (toastTrigger) {
-      const toastBootstrap =
-        bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-      toastTrigger.addEventListener("click", () => {
-        toastBootstrap.show();
-      });
-    }
-
     try {
-      const promise = await fetch("http://localhost:8080/orders/", {
+      const data = await fetch("http://localhost:8080/orders/", {
         method: "POST",
         body: JSON.stringify(shoppingCart.map((cartItem => Object.keys(cartItem)))),
         headers: {
@@ -63,9 +24,15 @@ function ViewOrder() {
         }
       });
 
-      const data = Promise.all(promise)
-
       console.log(data);
+
+      setOrderConfirmed(data)
+
+      var toastElem = document.querySelector(".toast");
+      var toast = new bootstrap.Toast(toastElem);
+      toast.show();
+
+      navigate("/view-order")
     } catch(error) {
       console.log("Woops something went wrong", error);
     }
@@ -86,10 +53,38 @@ function ViewOrder() {
             </div>
           ))}
         </div>
-        <button type="submit" className="btn btn-primary mt-4" onClick={handleClick} id="toastBtn">
+        <button
+          type="submit"
+          className="btn btn-primary mt-4"
+          onClick={handleClick}
+          id="toastBtn"
+        >
           Beställ
         </button>
-        <Toaster />
+        <div className="toast-container position-fixed bottom-0 end-0 p-3">
+          <div
+            id="toast"
+            className="toast"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="toast-header">
+              <strong className="me-auto">Beställningsbekräftelse</strong>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="toast"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="toast-body">
+              {orderConfirmed
+                ? `Tack för din beställning! Ditt ordernummer är ${orderConfirmed.uuid}`
+                : "Beställningen misslyckades, var vänlig försök igen."}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
