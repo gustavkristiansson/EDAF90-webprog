@@ -8,9 +8,6 @@ function ViewOrder() {
   const [orderConfirmed, setOrderConfirmed] = useState()
   const navigate = useNavigate();
 
-
-  console.log(shoppingCart.map((cartItem) => Object.keys(cartItem)));
-
   async function handleClick(e) {
     e.preventDefault()
 
@@ -29,7 +26,7 @@ function ViewOrder() {
         }
       });
 
-      console.log(data);
+      console.log(data)
 
       setOrderConfirmed(data)
 
@@ -59,15 +56,27 @@ function ViewOrder() {
               <span>{`pris: ${cartItem.getPrice()}kr`}</span>
             </div>
           ))}
-          <button
-            type="submit"
-            className="btn btn-primary mt-4 w-25 mx-auto"
-            onClick={handleClick}
-            id="toastBtn"
-          >
-            Beställ
-          </button>
+          <div className="mt-4 w-25 mx-auto justify-center">
+            <button
+              type="submit"
+              className="btn btn-primary text-center"
+              onClick={handleClick}
+              id="toastBtn"
+              hidden={shoppingCart.length === 0}
+            >
+              Beställ
+            </button>
+          </div>
+          <div className="mt-4" hidden={!orderConfirmed}>
+            <h4>Orderbekräftelse</h4>
+            <p>Status: {orderConfirmed?.status}</p>
+            <p>Ordernummer: {orderConfirmed?.uuid}</p>
+            <p>Tid: {orderConfirmed?.timestamp}</p>
+            <p>Antal sallader: {orderConfirmed?.order?.length}</p>
+            <p>Pris: {orderConfirmed?.price}</p>
+          </div>
         </div>
+
         <div className="toast-container position-fixed bottom-0 end-0 p-3">
           <div
             id="toast"

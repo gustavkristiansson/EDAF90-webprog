@@ -6,8 +6,6 @@ export const ConfirmOrder = () => {
     const props = useOutletContext();
     const salad = props.shoppingCart.find(salad => salad.uuid === uuid.id);
 
-    console.log(uuid);
-
     if (salad) {
         return (
             <div className="mt-3 alert alert-success alert-dismissible fade show" role="alert">

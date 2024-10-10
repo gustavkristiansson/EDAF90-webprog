@@ -3,26 +3,36 @@ const categories = ['foundations', 'proteins', 'extras', 'dressings']
 export default async function inventoryLoader() {
     const inventory = {}
 
-    const categoryList = categories.map(async category => {
-        const options = await fetchIngredient(category);
-        inventory[category] = [];
-        return { category, options }
-    });
-
-    const promiseList = await Promise.all(categoryList);
-
-    await Promise.all(promiseList.map(async ({ category, options }) => {
-        const ingredientsList = await Promise.all(options.map(name => fetchIngredient(category, name)));
-
-        ingredientsList.forEach(ingredient => {
-            for (var option of options) {
-                inventory[category][option] = ingredient;
-            }
-        });
-    }));
+    await Promise.all([
+        fetchIngredients('foundations'),
+        fetchIngredients('proteins'),
+        fetchIngredients('extras'),
+        fetchIngredients('dressings')
+    ]).then(([foundations, proteins, extras, dressings]) => {
+        inventory['foundations'] = foundations
+        inventory['proteins'] = proteins
+        inventory['extras'] = extras
+        inventory['dressings'] = dressings
+    })
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
     return inventory;
+}
+
+async function fetchIngredients(category) {
+    const options = await fetchIngredient(category)
+    const values = await Promise.all(options.map(async option => {
+        const details = await fetchIngredient(`${category}`, option)
+        return {
+            [option] : {
+                name: option,
+                ...details
+            }
+        };
+    }));
+
+    const test = values.reduce((accumulator, current) => ({...accumulator, ...current}), {});
+    return test
 }
 
 async function safeFetchJson(url) {
