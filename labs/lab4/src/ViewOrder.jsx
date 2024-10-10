@@ -26,8 +26,6 @@ function ViewOrder() {
         }
       });
 
-      console.log(data)
-
       setOrderConfirmed(data)
 
       var toastElem = document.querySelector(".toast");
