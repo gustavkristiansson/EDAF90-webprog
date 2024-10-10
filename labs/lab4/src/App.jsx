@@ -11,33 +11,23 @@ let didInit = false;
 
 function App() {
   const [shoppingCart, setShoppingCart] = useState(() => {
-    const prevCart = localStorage.getItem("shoppingCart");
+    let currentCart;
 
-    if (prevCart !== null) {
-      return JSON.parse(prevCart)
-    } else {
-      return []
+    try {
+      currentCart = Salad.parse(localStorage.getItem("shoppingCart") || String([]))
+    } catch (error) {
+      currentCart = []
     }
+
+    return currentCart;
   });
 
-  // useEffect(() => {
-  //   if (!didInit) {
-  //     didInit = true;
-  //     const cart = JSON.parse(localStorage.getItem("shoppingCart")) || [];
-  //     setShoppingCart(cart);
-  //   }
-  // }, [])
-
-  // useEffect(() => {
-  //   localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
-  // }, [shoppingCart])
+  useEffect(() => {
+    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
+  }, [shoppingCart])
 
   const addSalad = (salad) => {
     setShoppingCart(shoppingCart.concat([salad]));
-    console.log(shoppingCart);
-    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-
-    console.log(localStorage.getItem("shoppingCart"))
   };
   const nav = useNavigation()
 

@@ -35,7 +35,7 @@ function ViewOrder() {
       toast.show();
 
       setShoppingCart([])
-      window.localStorage.setItem("shoppingCart", [])
+      localStorage.setItem("shoppingCart", [])
       navigate("/view-order")
     } catch(error) {
       console.log("Woops something went wrong", error);
