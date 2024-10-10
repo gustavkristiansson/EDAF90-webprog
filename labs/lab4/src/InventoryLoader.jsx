@@ -31,8 +31,7 @@ async function fetchIngredients(category) {
         };
     }));
 
-    const test = values.reduce((accumulator, current) => ({...accumulator, ...current}), {});
-    return test
+   return values.reduce((accumulator, current) => ({...accumulator, ...current}), {});
 }
 
 async function safeFetchJson(url) {
