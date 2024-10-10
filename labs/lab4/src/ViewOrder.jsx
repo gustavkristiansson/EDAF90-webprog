@@ -73,7 +73,7 @@ function ViewOrder() {
             <p>Ordernummer: {orderConfirmed?.uuid}</p>
             <p>Tid: {orderConfirmed?.timestamp}</p>
             <p>Antal sallader: {orderConfirmed?.order?.length}</p>
-            <p>Pris: {orderConfirmed?.price}</p>
+            <p>Pris: {orderConfirmed?.price}kr</p>
           </div>
         </div>
 
