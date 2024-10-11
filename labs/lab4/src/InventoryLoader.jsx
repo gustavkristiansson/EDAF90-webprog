@@ -44,7 +44,7 @@ async function safeFetchJson(url) {
         });
 }
 
-async function fetchIngredient(type, ingredient) {
+function fetchIngredient(type, ingredient) {
     return ingredient ?
         safeFetchJson(`http://localhost:8080/${type}/${ingredient}`) :
         safeFetchJson(`http://localhost:8080/${type}`);
